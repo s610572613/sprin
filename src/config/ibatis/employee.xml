@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<typeAlias alias="employee" type="com.nineteen.model.Employee"/>
+	
+	<select id="queryEmployee" resultClass="employee">
+		<![CDATA[
+			SELECT * FROM employee
+		]]>
+	</select>
+	
+	<insert id="insert" parameterClass="employee">
+		INSERT INTO employee(
+			id,
+			name,
+			hireDate,
+			interest,
+			sal
+		) VALUES(
+			#id#,
+			#name#,
+			#hireDate#,
+			#interest#,
+			#sal#
+		)
+	</insert>
+	<!-- 根据id查询用户信息 -->
+	<select id="findEmpById" parameterClass="int" resultClass="employee">
+		SELECT * FROM employee WHERE id=#id#	
+	</select>
+	<update id="update" parameterClass="employee">
+		UPDATE employee SET
+		name=#name#,
+		hireDate=#hireDate#,
+		interest=#interest#,
+		sal=#sal#
+		where id=#id#
+	</update>
+	<delete id="delete" parameterClass="int">
+		delete from employee where id=#id#
+	</delete>
+</sqlMap>
